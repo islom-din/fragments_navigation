@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         if(savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container1, fragment1)
+                .replace(R.id.nav_host_fragment_container, fragment1)
                 .commit()
         }
     }
@@ -32,17 +32,26 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 
+    //TODO: remove this and use navigation component
     fun launchSecondFragment(name: String) {
-        // Так делать не хорошо
-        //val fragment2 = SecondFragment(name)
-        // Так надо делать!
-        val fragment2 = SecondFragment()
-        val args: Bundle = Bundle()
-        args.putString("NAME", name)
-        fragment2.arguments = args
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container1, fragment2)
+            .replace(
+                R.id.nav_host_fragment_container,
+                SecondFragment.getInstance(name)
+            )
+            .addToBackStack("second_fragment")
+            .commit()
+    }
+
+    //TODO: remove this and use navigation component
+    fun launchResultFragment(name: String, surname: String) {
+        val fragment3 = ResultFragment.getInstance(name, surname)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.nav_host_fragment_container, fragment3)
+            .addToBackStack("result_fragment")
             .commit()
     }
 }
