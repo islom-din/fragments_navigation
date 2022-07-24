@@ -2,6 +2,10 @@ package islom.din.workwithfragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import islom.din.workwithfragment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
