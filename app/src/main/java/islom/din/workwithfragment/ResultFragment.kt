@@ -36,20 +36,11 @@ class ResultFragment : Fragment() {
         private const val NAME = "name_arg"
         private const val SURNAME = "surname_arg"
 
-        fun getInstance(name: String, surname: String): ResultFragment {
-            return ResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(NAME, name)
-                    putString(SURNAME, surname)
-                }
+        fun getBundle(name: String, surname: String): Bundle {
+            return Bundle().apply {
+                putString(NAME, name)
+                putString(SURNAME, surname)
             }
-//
-//            val fragment = ResultFragment()// создание объекта
-//            val args = Bundle()// создание объекта
-//            args.putString(NAME, name)// использование свойства объекта
-//            args.putString(SURNAME, surname) // использование свойства объекта
-//            fragment.arguments = args // использование свойства объекта
-//            return fragment
         }
     }
 }

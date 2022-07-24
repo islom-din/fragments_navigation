@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import islom.din.workwithfragment.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
@@ -29,14 +30,15 @@ class SecondFragment : Fragment() {
             val surname = binding.surname.text.toString()
             Log.d("test_tag", "$surname ")
 
-            if(surname.isEmpty()) {
+            if (surname.isEmpty()) {
                 showText("Surname must not be empty!")
             } else {
                 Log.d("test_tag", "!!")
                 val name = requireArguments().getString(NAME, null) ?: return@setOnClickListener
-                if(requireActivity() is MainActivity) {
-                    (requireActivity() as MainActivity).launchResultFragment(name,surname)
-                }
+                findNavController().navigate(
+                    R.id.resultFragment,
+                    ResultFragment.getBundle(name, surname)
+                )
             }
         }
     }
@@ -53,11 +55,9 @@ class SecondFragment : Fragment() {
     companion object {
         private const val NAME = "name_arg"
 
-        fun getInstance(name: String) : SecondFragment {
-            return SecondFragment().apply {
-                arguments = Bundle().apply {
-                    putString(NAME, name)
-                }
+        fun getBundle(name: String): Bundle {
+            return Bundle().apply {
+                putString(NAME, name)
             }
         }
     }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import islom.din.workwithfragment.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
@@ -25,12 +26,13 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.button.setOnClickListener {
             val enteredName = binding.name.text.toString()
-            if(enteredName.isEmpty()) {
+            if (enteredName.isEmpty()) {
                 showText("Name must not be empty!")
             } else {
-                if(requireActivity() is MainActivity) {
-                    (requireActivity() as MainActivity).launchSecondFragment(enteredName)
-                }
+                findNavController().navigate(
+                    R.id.secondFragment,
+                    SecondFragment.getBundle(enteredName)
+                )
             }
         }
     }
